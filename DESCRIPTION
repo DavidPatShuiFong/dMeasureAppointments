@@ -1,0 +1,22 @@
+Package: dMeasureAppointments
+Title: Appointments module for dMeasure and GPstat!
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Fong",
+           role = c("aut", "cre"),
+           email = "vkelim@bigpond.com")
+Description: Appointments 
+License: file LICENSE Mozilla Public License v2.0
+Imports: 
+    config (>= 0.3),
+    golem (>= 0.3.1.9001),
+    shiny (>= 1.5.0),
+    processx
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat,
+    spelling
+Language: en-US
