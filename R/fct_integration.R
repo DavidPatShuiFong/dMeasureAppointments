@@ -9,8 +9,7 @@
 #' @name dMeasureAppointments
 #' @title dMeasureAppointments
 #'
-#' @include utils_r6.R
-#' @include utils_reactive.R
+#' @include utils_R6.R
 #' Functions for Appointment handling
 NULL
 

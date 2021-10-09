@@ -28,3 +28,16 @@ Suggests:
     testthat,
     spelling
 Language: en-US
+Collate: 
+    'app_config.R'
+    'app_server.R'
+    'app_ui.R'
+    'utils_R6.R'
+    'fct_integration.R'
+    'fct_tables.R'
+    'fct_userInterface.R'
+    'golem_utils_server.R'
+    'golem_utils_ui.R'
+    'run_app.R'
+    'utils_pipe.R'
+    'utils_reactive.R'
