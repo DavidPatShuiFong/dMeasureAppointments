@@ -1,18 +1,26 @@
 Package: dMeasureAppointments
-Title: Appointments module for dMeasure and GPstat!
+Title: dMeasureAppointments
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "David",
            family = "Fong",
            role = c("aut", "cre"),
            email = "vkelim@bigpond.com")
-Description: Appointments 
-License: file LICENSE Mozilla Public License v2.0
+Description: Appointments module for dMeasure and GPstat!
+License: MPL-2.0 | file LICENSE
 Imports: 
+    dplyr,
+    dbplyr,
+    R6,
+    pipeR,
+    dMeasure,
+    shiny,
     config (>= 0.3),
     golem (>= 0.3.1.9001),
     shiny (>= 1.5.0),
-    processx
+    processx,
+    attempt,
+    DT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
