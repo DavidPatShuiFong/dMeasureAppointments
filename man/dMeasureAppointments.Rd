@@ -33,7 +33,7 @@ dMeasureAppointments class
 \if{latex}{\out{\hypertarget{method-appointments}{}}}
 \subsection{Method \code{appointments()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$appointments(screentag = FALSE, screentag_print = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$appointments()}\if{html}{\out{</div>}}
 }
 
 }

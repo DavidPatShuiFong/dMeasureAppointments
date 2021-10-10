@@ -16,9 +16,6 @@ NULL
 #' @md
 #'
 #' @param dMeasureAppointments_obj R6 object
-#' @param screentag if neither `screentag` or `screentag_print` is
-#'     defined then values are derived from `self$printcopy_view`
-#' @param screentag_print
 #'
 #' @return dataframe of apppointments
 #'  $Patient, $AppointmentDate, $AppointmentTime,
@@ -26,32 +23,14 @@ NULL
 #'
 #' @export
 appointments <- function(
-  dMeasureAppointments_obj,
-  screentag = FALSE,
-  screentag_print = TRUE) {
-  dMeasureAppointments_obj$appointments(
-    screentag,
-    screentag_print
-  )
+  dMeasureAppointments_obj) {
+  dMeasureAppointments_obj$appointments()
 }
 .public(
   dMeasureAppointments, "appointments",
   function(
-    screentag = FALSE,
-    screentag_print = TRUE
-    # currently, screentag and screentag_print are ignored
-    # because there are no HTML tags available
   ) {
-    if (!screentag && !screentag_print) {
-      stop("One of 'screentag' or 'screentag_print' must be set to TRUE")
-    } else if (screentag && screentag_print) {
-      stop("Only one of 'screentag' or 'screentag_print' can be set to TRUE")
-    }
-
-    intID <- c(-1) # create 'empty' vector of intID
-
     l <- self$dM$appointments_filtered_time
-    intID <- c(-1, l %>>% dplyr::pull(InternalID))
 
     # no modifications are made, currently
     l <- l %>>%
@@ -68,12 +47,9 @@ appointments <- function(
   quote(
     shiny::eventReactive(
       c(
-        self$dM$appointments_filtered_timeR(),
-        self$printcopy_view()
+        self$dM$appointments_filtered_timeR()
       ), {
         self$appointments(
-          screentag = !self$printcopy_view(),
-          screentag_print = self$printcopy_view()
         )
       }
     )

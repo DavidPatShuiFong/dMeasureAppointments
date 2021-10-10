@@ -4,19 +4,10 @@
 \alias{appointments}
 \title{patient appointment list}
 \usage{
-appointments(
-  dMeasureAppointments_obj,
-  screentag = FALSE,
-  screentag_print = TRUE
-)
+appointments(dMeasureAppointments_obj)
 }
 \arguments{
 \item{dMeasureAppointments_obj}{R6 object}
-
-\item{screentag}{if neither \code{screentag} or \code{screentag_print} is
-defined then values are derived from \code{self$printcopy_view}}
-
-\item{screentag_print}{}
 }
 \value{
 dataframe of apppointments
