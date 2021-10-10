@@ -1,6 +1,6 @@
 Package: dMeasureAppointments
 Title: dMeasureAppointments
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person(given = "David",
            family = "Fong",
@@ -18,6 +18,7 @@ Imports:
     config (>= 0.3),
     golem (>= 0.3.1.9001),
     shiny (>= 1.5.0),
+    shinyWidgets,
     processx,
     attempt,
     DT
@@ -28,3 +29,16 @@ Suggests:
     testthat,
     spelling
 Language: en-US
+Collate: 
+    'app_config.R'
+    'app_server.R'
+    'app_ui.R'
+    'utils_R6.R'
+    'fct_integration.R'
+    'fct_tables.R'
+    'fct_userInterface.R'
+    'golem_utils_server.R'
+    'golem_utils_ui.R'
+    'run_app.R'
+    'utils_pipe.R'
+    'utils_reactive.R'

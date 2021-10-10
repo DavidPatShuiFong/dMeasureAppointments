@@ -9,8 +9,7 @@
 #' @name dMeasureAppointments
 #' @title dMeasureAppointments
 #'
-#' @include utils_r6.R
-#' @include utils_reactive.R
+#' @include utils_R6.R
 #' Functions for Appointment handling
 NULL
 
@@ -33,6 +32,22 @@ dMeasureIntegration <- function(information) {
   if (information == "Provides") {return(c("dMeasureAppointments"))}
   if (information == "Requires") {return(c("dMeasure"))}
   if (information == "moduleID") {return(c("Appointments_dt"))}
+}
+
+#' sidebarmenuPriority
+#'
+#' @name sidebarmenuPriority
+#'
+#' @description priority order to appear in sidebarmenu
+#'   integration with DailyMeasure
+#'
+#' 50 is medium priority. larger numbers are higher priority
+#'
+#' @return priority.
+#'
+#' @export
+sidebarmenuPriority <- function() {
+  return(99) # very high priority
 }
 
 #' dMeasureAppointments class

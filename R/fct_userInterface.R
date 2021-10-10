@@ -48,7 +48,10 @@ dMeasureShinytabItems <- function() {
       )),
       shiny::fluidRow(shiny::column(
         width = 12,
-        dMeasureAppointments::datatableUI("Appointments_dt")
+        shiny::div(
+          id = "appointments_datatable_wrapper",
+          dMeasureAppointments::datatableUI("Appointments_dt")
+        )
       ))
     )
   )
@@ -72,21 +75,8 @@ datatableUI <- function(id) {
 
   shiny::tagList(
     shiny::fluidRow(
-      shiny::column(
-        4,
-        shinyWidgets::switchInput(
-          inputId = ns("printcopy_view"),
-          label = paste(
-            "<i class=\"fas fa-print\"></i>",
-            "<i class=\"far fa-copy\"></i>",
-            "  Print and Copy View"
-          ),
-          labelWidth = "12em",
-          width = "20em"
-        )
-      )
-    ),
-    DT::DTOutput(ns("appointments_table"))
+      DT::DTOutput(ns("appointments_table"))
+    )
   )
 }
 
@@ -107,10 +97,6 @@ datatableServer <- function(id, dMAppointments) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    shiny::observeEvent(input$printcopy_view, ignoreNULL = TRUE, {
-      dMAppointments$printcopy_view(input$printcopy_view)
-    })
-
     styled_appointments_list <- shiny::reactive({
       shiny::validate(
         shiny::need(
@@ -120,22 +106,9 @@ datatableServer <- function(id, dMAppointments) {
       )
       shiny::req(dMAppointments$dM$clinicians)
 
-      if (input$printcopy_view == TRUE) {
-        DailyMeasure::datatable_styled(
-          dMAppointments$appointmentsR()
-        )
-      } else {
-        escape_column <- which(
-          names(dMAppointments$appointmentsR()) == "EscapedColumnDummy"
-          # currently there is no special HTML tags in appointments view
-        )
-        DailyMeasure::datatable_styled(
-          dMAppointments$appointmentsR(),
-          escape = c(escape_column),
-          copyHtml5 = NULL, printButton = NULL,
-          downloadButton = NULL # no copy/print buttons
-        )
-      }
+      DailyMeasure::datatable_styled(
+        dMAppointments$appointmentsR()
+      )
     })
 
     output$appointments_table <- DT::renderDT({
