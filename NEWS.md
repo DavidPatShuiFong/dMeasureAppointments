@@ -5,6 +5,13 @@ date: "09/10/2021"
 output: html_document
 ---
 
+# 1.0.1
+12th October 2021
+
+## Changes
+
+* Modularization of user interface
+
 # dMeasureAppointments 1.0.0
 10th October 2021
 

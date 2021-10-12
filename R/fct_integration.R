@@ -50,6 +50,52 @@ sidebarmenuPriority <- function() {
   return(99) # very high priority
 }
 
+#' item description for left sidebar menu
+#'
+#' @name shinydashboardmenuItem
+#'
+#' @return shinydashboard menuItem object
+#'
+#' @export
+shinydashboardmenuItem <- function() {
+  x <- list(
+    shinydashboard::menuItem(
+      "Appointments",
+      tabName = "appointments",
+      icon = shiny::icon("calendar-check")
+    )
+  )
+
+  return(x)
+}
+
+#' center panel description
+#'
+#' @name dMeasureShinytabItems
+#'
+#' @return shinytabItems
+#'
+#' @export
+dMeasureShinytabItems <- function() {
+  x <- list(
+    shinydashboard::tabItem(
+      tabName = "appointments",
+      shiny::fluidRow(shiny::column(
+        width = 12, align = "center",
+        shiny::h2("Appointments")
+      )),
+      shiny::fluidRow(shiny::column(
+        width = 12,
+        shiny::div(
+          id = "appointments_datatable_wrapper",
+          dMeasureAppointments::datatableUI("Appointments_dt")
+        )
+      ))
+    )
+  )
+  return(x)
+}
+
 #' dMeasureAppointments class
 #' @title dMeasureAppointments class
 #' @description list appointments by clinician providers
