@@ -16,6 +16,7 @@ dMeasureAppointments class
 \itemize{
 \item \href{#method-new}{\code{dMeasureAppointments$new()}}
 \item \href{#method-appointments}{\code{dMeasureAppointments$appointments()}}
+\item \href{#method-appointments_telephone}{\code{dMeasureAppointments$appointments_telephone()}}
 \item \href{#method-clone}{\code{dMeasureAppointments$clone()}}
 }
 }
@@ -34,6 +35,15 @@ dMeasureAppointments class
 \subsection{Method \code{appointments()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$appointments()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-appointments_telephone"></a>}}
+\if{latex}{\out{\hypertarget{method-appointments_telephone}{}}}
+\subsection{Method \code{appointments_telephone()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$appointments_telephone()}\if{html}{\out{</div>}}
 }
 
 }

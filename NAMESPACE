@@ -2,6 +2,7 @@
 
 export("%>>%")
 export(appointments)
+export(appointments_telephone)
 export(dMeasureAppointments)
 export(dMeasureIntegration)
 export(dMeasureShinytabItems)

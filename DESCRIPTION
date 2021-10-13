@@ -1,6 +1,6 @@
 Package: dMeasureAppointments
 Title: dMeasureAppointments
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: 
     person(given = "David",
            family = "Fong",
@@ -40,6 +40,7 @@ Collate:
     'golem_utils_server.R'
     'golem_utils_ui.R'
     'mod_appointments_plain.R'
+    'mod_appointments_telephone.R'
     'run_app.R'
     'utils_pipe.R'
     'utils_reactive.R'

@@ -5,6 +5,14 @@ date: "09/10/2021"
 output: html_document
 ---
 
+# 1.1.0
+13th October 2021
+
+## New
+
+* appointment table with telephone numbers
+  + `$appointments_telephone` (exported) appends telephone numbers to `dMeasure$appointments_filtered_time`
+
 # 1.0.1
 12th October 2021
 

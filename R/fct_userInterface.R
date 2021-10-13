@@ -27,7 +27,17 @@ datatableUI <- function(id) {
   ns <- shiny::NS(id)
 
   shiny::tagList(
-    mod_appointments_plain_ui(ns("appointments_plain"))
+    shiny::tabsetPanel(
+      type = "tabs",
+      shiny::tabPanel(
+        "Appointments",
+        mod_appointments_plain_ui(ns("appointments_plain"))
+      ),
+      shiny::tabPanel(
+        "Telephone",
+        mod_appointments_telephone_ui(ns("appointments_telephone"))
+      )
+    )
   )
 }
 
@@ -49,5 +59,6 @@ datatableServer <- function(id, dMAppointments) {
     ns <- session$ns
 
     mod_appointments_plain_server("appointments_plain", dMAppointments)
+    mod_appointments_telephone_server("appointments_telephone", dMAppointments)
   })
 }
