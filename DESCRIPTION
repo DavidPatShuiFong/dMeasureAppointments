@@ -18,10 +18,10 @@ Imports:
     config (>= 0.3),
     golem (>= 0.3.1.9001),
     shiny (>= 1.5.0),
-    shinyWidgets,
     processx,
     attempt,
-    DT
+    DT,
+    httr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
@@ -35,6 +35,7 @@ Collate:
     'app_ui.R'
     'utils_R6.R'
     'fct_integration.R'
+    'fct_sms.R'
     'fct_tables.R'
     'fct_userInterface.R'
     'golem_utils_server.R'
