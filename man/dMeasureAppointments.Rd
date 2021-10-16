@@ -15,6 +15,7 @@ dMeasureAppointments class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{dMeasureAppointments$new()}}
+\item \href{#method-read_configuration_db}{\code{dMeasureAppointments$read_configuration_db()}}
 \item \href{#method-appointments}{\code{dMeasureAppointments$appointments()}}
 \item \href{#method-appointments_telephone}{\code{dMeasureAppointments$appointments_telephone()}}
 \item \href{#method-clone}{\code{dMeasureAppointments$clone()}}
@@ -26,6 +27,15 @@ dMeasureAppointments class
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$new(dMeasure_obj)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-read_configuration_db"></a>}}
+\if{latex}{\out{\hypertarget{method-read_configuration_db}{}}}
+\subsection{Method \code{read_configuration_db()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$read_configuration_db()}\if{html}{\out{</div>}}
 }
 
 }

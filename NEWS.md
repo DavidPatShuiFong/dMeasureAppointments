@@ -5,6 +5,15 @@ date: "09/10/2021"
 output: html_document
 ---
 
+# 1.2.0
+16th October 2021
+
+## New
+
+* `initialize_configuration_db` (exported function) and `$read_configuration_db` (method)
+  + integration with `dMeasure` configuration database
+  + `initialize_join_config` and `initialize_sms_config` return lists to assist setting up configuration databases
+
 # 1.1.0
 15th October 2021
 
@@ -13,6 +22,7 @@ output: html_document
 * appointment table with telephone numbers
   + `$appointments_telephone` (exported) appends telephone numbers to `dMeasure$appointments_filtered_time`
 * `$sms_join` (export) send SMS with Join
+  + Join is by joaoapps https://joaoapps.com/join/
 
 # 1.0.1
 12th October 2021

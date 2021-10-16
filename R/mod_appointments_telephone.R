@@ -42,7 +42,8 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
 
     output$appointments_table <- DT::renderDT({
       styled_appointments_list()
-    })
+    },
+    server = FALSE) # this is to use the 'Select' extension
   })
 }
 
