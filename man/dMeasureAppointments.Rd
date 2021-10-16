@@ -17,6 +17,9 @@ dMeasureAppointments class
 \item \href{#method-write_join_config}{\code{dMeasureAppointments$write_join_config()}}
 \item \href{#method-update_join_config}{\code{dMeasureAppointments$update_join_config()}}
 \item \href{#method-remove_join_config}{\code{dMeasureAppointments$remove_join_config()}}
+\item \href{#method-write_sms_config}{\code{dMeasureAppointments$write_sms_config()}}
+\item \href{#method-update_sms_config}{\code{dMeasureAppointments$update_sms_config()}}
+\item \href{#method-remove_sms_config}{\code{dMeasureAppointments$remove_sms_config()}}
 \item \href{#method-new}{\code{dMeasureAppointments$new()}}
 \item \href{#method-read_configuration_db}{\code{dMeasureAppointments$read_configuration_db()}}
 \item \href{#method-appointments}{\code{dMeasureAppointments$appointments()}}
@@ -48,6 +51,33 @@ dMeasureAppointments class
 \subsection{Method \code{remove_join_config()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$remove_join_config(api)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_sms_config"></a>}}
+\if{latex}{\out{\hypertarget{method-write_sms_config}{}}}
+\subsection{Method \code{write_sms_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$write_sms_config(name, smstext)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-update_sms_config"></a>}}
+\if{latex}{\out{\hypertarget{method-update_sms_config}{}}}
+\subsection{Method \code{update_sms_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$update_sms_config(id, name, smstext)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_sms_config"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_sms_config}{}}}
+\subsection{Method \code{remove_sms_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$remove_sms_config(name)}\if{html}{\out{</div>}}
 }
 
 }

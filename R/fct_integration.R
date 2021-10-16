@@ -195,6 +195,7 @@ initialize_sms_config <- function() {
       tablename = "Appointments_smsConfig",
       variable_list = list(
         c("id", "integer"),
+        c("name", "character"),
         c("smstext", "character")
       )
     )

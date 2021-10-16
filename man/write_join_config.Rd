@@ -9,7 +9,7 @@ write_join_config(dMeasureAppointments_obj, api, apikey, deviceId)
 \arguments{
 \item{dMeasureAppointments_obj}{R6 object}
 
-\item{api}{name of patient list}
+\item{api}{name of API}
 
 \item{deviceId}{}
 }

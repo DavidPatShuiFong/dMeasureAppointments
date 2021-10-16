@@ -57,14 +57,18 @@ dMeasureConfigurationTabPanelUI <- function(id) {
       shiny::tabsetPanel(
         type = "tabs",
         shiny::tabPanel(
-          "API configuration",
+          "Join API configuration",
+          shiny::br(),
           shiny::fluidRow(
             DTedit::dteditmodUI(ns("join_configuration"))
           )
         ),
         shiny::tabPanel(
-          "SMS configuratioin",
-          shiny::fluidRow()
+          "SMS configuration",
+          shiny::br(),
+          shiny::fluidRow(
+            DTedit::dteditmodUI(ns("sms_configuration"))
+          )
         )
       )
   )
@@ -91,6 +95,10 @@ dMeasureConfigurationTabPanelUI <- function(id) {
 dMeasureConfigurationTabPanel <- function(id, dMAppointments) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
+
+
+    ##########################################
+    # join config
 
     join_config.callback.insert <- function(data, row) {
 
@@ -157,6 +165,75 @@ dMeasureConfigurationTabPanel <- function(id, dMAppointments) {
           callback.insert = join_config.callback.insert,
           callback.delete = join_config.callback.delete,
           callback.update = join_config.callback.update
+        )
+      }
+    )
+
+    ################################
+    # SMS config
+
+    sms_config.callback.insert <- function(data, row) {
+
+      if (data[row, "name"][[1]] %in% data[-row, ]$name) {
+        stop(paste("Can't define the same name twice!"))
+      }
+      if (data[row, "name"][[1]] == "") {
+        stop(paste("Name cannot be empty!"))
+      }
+
+      newID <- dMAppointments$write_sms_config(
+        name = data[row, "name"][[1]],
+        smstext = data[row, "smstext"][[1]]
+      )
+      data <- dMAppointments$sms_config %>>% dplyr::collect()
+      # read the database back in
+
+      return(data)
+    }
+
+    sms_config.callback.update <- function(data, olddata, row) {
+
+      tryCatch(
+        result <- dMAppointments$update_sms_config(
+          id = data[row, "id"][[1]],
+          name = data[row, "name"][[1]],
+          # name might have been changed!
+          smstext = data[row, "smstext"][[1]]
+        ),
+        error = function(e) stop(e)
+      )
+
+      data <- dMAppointments$sms_config %>>% dplyr::collect()
+      # read the database back in
+
+      return(data)
+    }
+
+    sms_config.callback.delete <- function(data, row) {
+      tryCatch(
+        dMAppointments$remove_sms_config(data[row, "name"][[1]]),
+        error = function(e) stop(e)
+      )
+      data <- dMAppointments$sms_config %>>% dplyr::collect()
+      # read the database back in
+
+      return(data)
+    }
+
+    shiny::observeEvent(
+      dMAppointments$sms_configR(),
+      ignoreNULL = TRUE, once = TRUE, {
+        shiny::callModule(
+          DTedit::dteditmod,
+          "sms_configuration",
+          thedata = dMAppointments$sms_config %>>% dplyr::collect(),
+          view.cols = c("name", "smstext"),
+          edit.cols = c("name", "smstext"),
+          edit.label.cols = c("Name", "SMS text"),
+          input.types = list(name = "textInput", smstext = "textAreaInput"),
+          callback.insert = sms_config.callback.insert,
+          callback.delete = sms_config.callback.delete,
+          callback.update = sms_config.callback.update
         )
       }
     )
