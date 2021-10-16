@@ -32,7 +32,7 @@ dMeasureIntegration <- function(information) {
   if (information == "Provides") {return(c("dMeasureAppointments"))}
   if (information == "Requires") {return(c("dMeasure"))}
   if (information == "moduleID") {return(c("Appointments_dt"))}
-  # if (information == "configID") {return(c("dMeasureAppointments_config_dt"))}
+  if (information == "configID") {return(c("dMeasureAppointments_config"))}
 }
 
 #' sidebarmenuPriority
@@ -230,8 +230,14 @@ read_configuration_db <- function(
     dplyr::tbl("Appointments_smsConfig")
   # table of stored SMS messages
 
+  private$set_reactive(self$join_configR, self$join_config %>>% dplyr::collect())
+  private$set_reactive(self$sms_configR, self$sms_config %>>% dplyr::collect())
+
   return(self$join_config)
 })
+.reactive(dMeasureAppointments, "join_configR", NULL)
+.reactive(dMeasureAppointments, "sms_configR", NULL)
+
 
 #' initialize the configuration database
 #'

@@ -14,12 +14,42 @@ dMeasureAppointments class
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-write_join_config}{\code{dMeasureAppointments$write_join_config()}}
+\item \href{#method-update_join_config}{\code{dMeasureAppointments$update_join_config()}}
+\item \href{#method-remove_join_config}{\code{dMeasureAppointments$remove_join_config()}}
 \item \href{#method-new}{\code{dMeasureAppointments$new()}}
 \item \href{#method-read_configuration_db}{\code{dMeasureAppointments$read_configuration_db()}}
 \item \href{#method-appointments}{\code{dMeasureAppointments$appointments()}}
 \item \href{#method-appointments_telephone}{\code{dMeasureAppointments$appointments_telephone()}}
 \item \href{#method-clone}{\code{dMeasureAppointments$clone()}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_join_config"></a>}}
+\if{latex}{\out{\hypertarget{method-write_join_config}{}}}
+\subsection{Method \code{write_join_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$write_join_config(api, apikey, deviceId)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-update_join_config"></a>}}
+\if{latex}{\out{\hypertarget{method-update_join_config}{}}}
+\subsection{Method \code{update_join_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$update_join_config(id, api, apikey, deviceId)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_join_config"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_join_config}{}}}
+\subsection{Method \code{remove_join_config()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dMeasureAppointments$remove_join_config(api)}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}

@@ -13,6 +13,8 @@ output: html_document
 * `initialize_configuration_db` (exported function) and `$read_configuration_db` (method)
   + integration with `dMeasure` configuration database
   + `initialize_join_config` and `initialize_sms_config` return lists to assist setting up configuration databases
+  + methods to write, delete and modify the 'Join' configuration database
++ user interface (UI and server) for configuring 'Join' with DailyMeasure/GPstat
 
 # 1.1.0
 15th October 2021
