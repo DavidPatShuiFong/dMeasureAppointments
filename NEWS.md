@@ -10,6 +10,7 @@ output: html_document
 
 ## New
 
+* send SMS reminders for appointments via 'Join'
 * `initialize_configuration_db` (exported function) and `$read_configuration_db` (method)
   + integration with `dMeasure` configuration database
   + `initialize_join_config` and `initialize_sms_config` return lists to assist setting up configuration databases
