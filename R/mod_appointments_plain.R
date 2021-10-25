@@ -33,8 +33,14 @@ mod_appointments_plain_server <- function(id, dMAppointments){
       )
       shiny::req(dMAppointments$dM$clinicians)
 
+      # `dateformat` is a function to convert dates into desired date format
+      dateformat <- dMAppointments$dM$formatdate()
+
       DailyMeasure::datatable_styled(
-        dMAppointments$appointmentsR()
+        dMAppointments$appointmentsR() %>>%
+          dplyr::mutate(
+            AppointmentDate = dateformat(AppointmentDate)
+          )
       )
     })
 

@@ -35,8 +35,13 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
       )
       shiny::req(dMAppointments$dM$clinicians)
 
+      # `dateformat` is a function to convert dates into desired date format
+      dateformat <- dMAppointments$dM$formatdate()
+
       DailyMeasure::datatable_styled(
-        dMAppointments$appointments_telephoneR(),
+        dMAppointments$appointments_telephoneR() %>>%
+          dplyr::mutate(AppointmentDate = dateformat(AppointmentDate)
+          ),
         extensions = c("Buttons", "Scroller", "Responsive", "Select"), # allow selection
         selectAllButton = "selectAll",
         selectNoneButton = "selectNone",
@@ -94,13 +99,17 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
     shiny::observeEvent(input$sendSMSnow, {
       if (length(input$appointments_table_rows_selected) > 0) {
         # only if someone to send an SMS to!
+
+        # `dateformat` is a function to convert dates into desired date format
+        dateformat <- dMAppointments$dM$formatdate()
+
         smstable <- dMAppointments$appointments_telephoneR() %>>%
           dplyr::slice(input$appointments_table_rows_selected) %>>%
           # choose selected rows
           dplyr::mutate(text = input$smsform) %>>% # the form SMS
           # replace various patterns
           dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%PatientName%", replacement = Patient)) %>>%
-          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%AppointmentDate%", replacement = AppointmentDate)) %>>%
+          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%AppointmentDate%", replacement = dateformat(AppointmentDate))) %>>%
           dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%AppointmentTime%", replacement = AppointmentTime)) %>>%
           dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%Provider%", replacement = Provider)) %>>%
           dplyr::filter(nchar(MobilePhone) > 0) # at this point, only accept mobile phone numbers

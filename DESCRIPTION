@@ -28,7 +28,8 @@ LazyData: true
 RoxygenNote: 7.1.1
 Suggests: 
     testthat,
-    spelling
+    spelling,
+    lubridate
 Language: en-US
 Collate: 
     'app_config.R'
