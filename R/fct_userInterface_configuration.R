@@ -7,7 +7,7 @@
 #' requires R6 methods from fct_integration.R
 #'
 #' @include fct_integration.R
-
+#' @include utils_help.R
 
 #' Appointments module - configuration tabpanel item
 #'
@@ -68,6 +68,13 @@ dMeasureConfigurationTabPanelUI <- function(id) {
           shiny::br(),
           shiny::fluidRow(
             DTedit::dteditmodUI(ns("sms_configuration"))
+          ),
+          shiny::br(),
+          shiny::fluidRow(
+            shiny::column(
+              12,
+              sms_tags
+            )
           )
         )
       )

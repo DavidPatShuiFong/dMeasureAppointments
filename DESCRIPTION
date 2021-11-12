@@ -30,7 +30,8 @@ Suggests:
     testthat,
     spelling,
     lubridate,
-    toOrdinal
+    toOrdinal,
+    shinytoastr
 Language: en-US
 Collate: 
     'app_config.R'
@@ -42,6 +43,7 @@ Collate:
     'fct_sms.R'
     'fct_tables.R'
     'fct_userInterface.R'
+    'utils_help.R'
     'fct_userInterface_configuration.R'
     'golem_utils_server.R'
     'golem_utils_ui.R'

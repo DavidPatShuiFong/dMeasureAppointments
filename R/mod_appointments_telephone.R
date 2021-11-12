@@ -1,3 +1,13 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+#' Configuration interface elements of dMeasureAppointments
+#'
+#' requires R6 methods from fct_integration.R
+#'
+#' @include utils_help.R
+
 #' appointments_telephone UI Function
 #'
 #' @description A shiny Module.
@@ -11,7 +21,16 @@ mod_appointments_telephone_ui <- function(id){
   ns <- NS(id)
   tagList(
     shiny::br(),
-    shiny::actionButton(ns("sendSMS"), "Send SMS"),
+    shiny::fluidRow(
+      shiny::column(
+        2,
+        shiny::actionButton(ns("sendSMS"), "Send SMS")
+      ),
+      shiny::column(
+        10,
+        shiny::helpText("Choose at least one appointment before trying to send an SMS"),
+      )
+    ),
     shiny::br(),
     shiny::fluidRow(
       DT::DTOutput(ns("appointments_table"))
@@ -55,46 +74,66 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
     server = FALSE) # this is to use the 'Select' extension
 
     shiny::observeEvent(input$sendSMS, {
-      shiny::showModal(
-        shiny::modalDialog(
-          title = "Send SMS",
-          "Number of SMS to send : ", length(input$appointments_table_rows_selected),
-          shiny::fluidRow(
-            shiny::column(
-              6,
-              shiny::selectInput(
-                inputId = ns("join_choice"), # currently there can only be one choice
-                label = "SMS configuration", # 'Join'
-                choices = dMAppointments$join_config %>>% dplyr::pull(api)
+      if (length(input$appointments_table_rows_selected) > 0) {
+        # only if someone to send an SMS to!
+        shiny::showModal(
+          shiny::modalDialog(
+            title = "Send SMS",
+            "Number of SMS to send : ", length(input$appointments_table_rows_selected),
+            shiny::fluidRow(
+              shiny::column(
+                6,
+                shiny::selectInput(
+                  inputId = ns("join_choice"), # currently there can only be one choice
+                  label = "SMS configuration", # 'Join'
+                  choices = dMAppointments$join_config %>>% dplyr::pull(api)
+                )
+              ),
+              shiny::column(
+                6,
+                shiny::selectInput(
+                  inputId = ns("sms_choices"), # pro-forma choices
+                  label = "SMS pro-formas",
+                  choices = dMAppointments$sms_config %>>% dplyr::pull(name)
+                  # defaults to first choice
+                )
               )
             ),
-            shiny::column(
-              6,
-              shiny::selectInput(
-                inputId = ns("sms_choices"), # pro-forma choices
-                label = "SMS pro-formas",
-                choices = dMAppointments$sms_config %>>% dplyr::pull(name)
+            shiny::br(),
+            shiny::fluidRow(
+              shiny::column(
+                12,
+                shiny::textAreaInput(
+                  inputId = ns("smsform"),
+                  label = "SMS pro-forma",
+                  rows = 6,
+                  value = dMAppointments$sms_config %>>%
+                    dplyr::collect() %>>% # force collect to do input$sms_choices comparison
+                    head(1) %>>% # first row (if any)
+                    dplyr::pull(smstext)
+                )
               )
-            )
-          ),
-          shiny::br(),
-          shiny::fluidRow(
-            shiny::column(
-              12,
-              shiny::textAreaInput(
-                inputId = ns("smsform"),
-                label = "SMS pro-forma",
-                rows = 6
+            ),
+            shiny::br(),
+            shiny::fluidRow(
+              shiny::column(
+                12,
+                sms_tags
               )
-            )
-          ),
-          footer = shiny::tagList(
-            shiny::modalButton("Cancel"),
-            shiny::actionButton(ns("sendSMSnow"), "Send SMSs now")
-          ),
-          size = "m"
+            ),
+            footer = shiny::tagList(
+              shiny::modalButton("Cancel"),
+              shiny::actionButton(ns("sendSMSnow"), "Send SMSs now")
+            ),
+            size = "m"
+          )
         )
-      )
+      } else {
+        shinytoastr::toastr_warning(
+          message = "Must select at least one appointment to send!",
+          position = "bottom-center"
+        )
+      }
     })
     shiny::observeEvent(input$sendSMSnow, {
       if (length(input$appointments_table_rows_selected) > 0) {

@@ -1,3 +1,7 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 #' appointments_plain UI Function
 #'
 #' @description A shiny Module.
@@ -22,7 +26,7 @@ mod_appointments_plain_ui <- function(id){
 #' @noRd
 mod_appointments_plain_server <- function(id, dMAppointments){
 
-  shiny::moduleServer( id, function(input, output, session){
+  shiny::moduleServer(id, function(input, output, session){
     ns <- session$ns
     styled_appointments_list <- shiny::reactive({
       shiny::validate(
