@@ -29,7 +29,8 @@ RoxygenNote: 7.1.1
 Suggests: 
     testthat,
     spelling,
-    lubridate
+    lubridate,
+    toOrdinal
 Language: en-US
 Collate: 
     'app_config.R'

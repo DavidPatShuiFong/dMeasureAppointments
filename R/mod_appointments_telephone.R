@@ -99,7 +99,6 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
     shiny::observeEvent(input$sendSMSnow, {
       if (length(input$appointments_table_rows_selected) > 0) {
         # only if someone to send an SMS to!
-
         # `dateformat` is a function to convert dates into desired date format
         dateformat <- dMAppointments$dM$formatdate()
 
@@ -108,10 +107,85 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
           # choose selected rows
           dplyr::mutate(text = input$smsform) %>>% # the form SMS
           # replace various patterns
-          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%PatientName%", replacement = Patient)) %>>%
-          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%AppointmentDate%", replacement = dateformat(AppointmentDate))) %>>%
-          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%AppointmentTime%", replacement = AppointmentTime)) %>>%
-          dplyr::mutate(text = stringi::stri_replace_all(text, fixed = "%Provider%", replacement = Provider)) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%PatientName%",
+              replacement = Patient
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDate%",
+              replacement = dateformat(AppointmentDate)
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDateDMY%",
+              replacement = format(AppointmentDate, "%d-%m-%Y")
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDateOrdinal%",
+              replacement = toOrdinal::toOrdinalDate(AppointmentDate)
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDayOfWeek%",
+              replacement = weekdays(AppointmentDate, abbreviate = FALSE)
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDayOfMonth%",
+              replacement = lubridate::mday(AppointmentDate)
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentDayOfMonthOrdinal%",
+              replacement = toOrdinal::toOrdinal(lubridate::mday(AppointmentDate))
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentMonth%",
+              replacement = months(AppointmentDate, abbreviate = FALSE)
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%Appointment24hrTime%",
+              replacement = AppointmentTime
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%AppointmentTime%",
+              # time will be of the format '14:52'
+              # convert to '02:52 PM'
+              replacement = format(strptime(AppointmentTime, format = "%H:%M"), "%I:%M %p")
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%Provider%",
+              replacement = Provider
+            )
+          ) %>>%
           dplyr::filter(nchar(MobilePhone) > 0) # at this point, only accept mobile phone numbers
         by(
           # iterate over rows of 'smstable'
