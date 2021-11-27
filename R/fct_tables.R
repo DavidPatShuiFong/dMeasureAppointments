@@ -89,7 +89,7 @@ appointments_telephone <- function(
       dplyr::left_join(
         self$dM$db$patients %>>%
           dplyr::select(
-            InternalID, MobilePhone, HomePhone, WorkPhone
+            InternalID, MobilePhone, HomePhone, WorkPhone, Firstname, Surname, Preferredname
           ) %>>%
           dplyr::filter(InternalID %in% intID),
         copy = TRUE
@@ -97,7 +97,7 @@ appointments_telephone <- function(
       dplyr::select(
         Patient, AppointmentDate, AppointmentTime,
         Provider, Status,
-        MobilePhone, HomePhone, WorkPhone
+        MobilePhone, HomePhone, WorkPhone, Firstname, Surname, Preferredname
       )
 
     return(l)

@@ -156,6 +156,27 @@ mod_appointments_telephone_server <- function(id, dMAppointments){
           dplyr::mutate(
             text = stringi::stri_replace_all(
               text,
+              fixed = "%Firstname%",
+              replacement = Firstname
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%Surname%",
+              replacement = Surname
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
+              fixed = "%Preferredname%",
+              replacement = Preferredname
+            )
+          ) %>>%
+          dplyr::mutate(
+            text = stringi::stri_replace_all(
+              text,
               fixed = "%AppointmentDate%",
               replacement = dateformat(AppointmentDate)
             )

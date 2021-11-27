@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # 1.2.0
-16th October 2021
+27th November 2021
 
 ## New
 

@@ -61,7 +61,29 @@ dMeasureConfigurationTabPanelUI <- function(id) {
           shiny::br(),
           shiny::fluidRow(
             DTedit::dteditmodUI(ns("join_configuration"))
-          )
+          ),
+          shiny::br(),
+          shiny::tags$strong(
+            shiny::tags$a(
+              href = "https://joaoapps.com/join/",
+              target = "_blank",
+              rel = "noopener noreferrer",
+              "Join by joaoapps"
+            )
+          ),
+          " allows ", shiny::tags$em("GPstat!"), " to communicate with an Android phone.",
+          shiny::br(),
+          "Installation instructions for ", shiny::tags$em("Join"), "can be found at ",
+          shiny::tags$a(
+            href = "http://www.juanmtech.com/join-by-joaoapps-beginners-guide/",
+            target = "_blank",
+            rel = "noopener noreferrer",
+            "the juanmtech web site."
+          ),
+          shiny::br(),
+          "Look for the section on the website title ", shiny::tags$strong("Join API"),
+          " for instructions on how to find your Android phone's ", shiny::tags$em("Device ID"),
+          " and your Join ", shiny::tags$em("API Key"), "."
         ),
         shiny::tabPanel(
           "SMS configuration",
