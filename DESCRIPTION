@@ -1,6 +1,6 @@
 Package: dMeasureAppointments
 Title: dMeasureAppointments
-Version: 1.0.0
+Version: 1.2.0
 Authors@R: 
     person(given = "David",
            family = "Fong",
@@ -18,16 +18,20 @@ Imports:
     config (>= 0.3),
     golem (>= 0.3.1.9001),
     shiny (>= 1.5.0),
-    shinyWidgets,
     processx,
     attempt,
-    DT
+    DT,
+    httr,
+    stringi,
+    spelling,
+    lubridate,
+    toOrdinal,
+    shinytoastr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat,
-    spelling
+    testthat
 Language: en-US
 Collate: 
     'app_config.R'
@@ -35,10 +39,16 @@ Collate:
     'app_ui.R'
     'utils_R6.R'
     'fct_integration.R'
+    'fct_configuration.R'
+    'fct_sms.R'
     'fct_tables.R'
     'fct_userInterface.R'
+    'utils_help.R'
+    'fct_userInterface_configuration.R'
     'golem_utils_server.R'
     'golem_utils_ui.R'
+    'mod_appointments_plain.R'
+    'mod_appointments_telephone.R'
     'run_app.R'
     'utils_pipe.R'
     'utils_reactive.R'

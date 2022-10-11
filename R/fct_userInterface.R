@@ -12,53 +12,6 @@ NULL
 
 ###########################################################
 
-#' item description for left sidebar menu
-#'
-#' @name shinydashboardmenuItem
-#'
-#' @return shinydashboard menuItem object
-#'
-#' @export
-shinydashboardmenuItem <- function() {
-  x <- list(
-    shinydashboard::menuItem(
-      "Appointments",
-      tabName = "appointments",
-      icon = shiny::icon("calendar-check")
-    )
-  )
-
-  return(x)
-}
-
-#' center panel description
-#'
-#' @name dMeasureShinytabItems
-#'
-#' @return shinytabItems
-#'
-#' @export
-dMeasureShinytabItems <- function() {
-  x <- list(
-    shinydashboard::tabItem(
-      tabName = "appointments",
-      shiny::fluidRow(shiny::column(
-        width = 12, align = "center",
-        shiny::h2("Appointments")
-      )),
-      shiny::fluidRow(shiny::column(
-        width = 12,
-        shiny::div(
-          id = "appointments_datatable_wrapper",
-          dMeasureAppointments::datatableUI("Appointments_dt")
-        )
-      ))
-    )
-  )
-  return(x)
-}
-
-
 #' Appointments module - UI function
 #'
 #' Display appointments within selected range of dates and providers
@@ -74,8 +27,16 @@ datatableUI <- function(id) {
   ns <- shiny::NS(id)
 
   shiny::tagList(
-    shiny::fluidRow(
-      DT::DTOutput(ns("appointments_table"))
+    shiny::tabsetPanel(
+      type = "tabs",
+      shiny::tabPanel(
+        "Appointments",
+        mod_appointments_plain_ui(ns("appointments_plain"))
+      ),
+      shiny::tabPanel(
+        "Telephone",
+        mod_appointments_telephone_ui(ns("appointments_telephone"))
+      )
     )
   )
 }
@@ -97,22 +58,7 @@ datatableServer <- function(id, dMAppointments) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    styled_appointments_list <- shiny::reactive({
-      shiny::validate(
-        shiny::need(
-          dMAppointments$dM$appointments_filtered_timeR(),
-          "No appointments in selected range"
-        )
-      )
-      shiny::req(dMAppointments$dM$clinicians)
-
-      DailyMeasure::datatable_styled(
-        dMAppointments$appointmentsR()
-      )
-    })
-
-    output$appointments_table <- DT::renderDT({
-      styled_appointments_list()
-    })
+    mod_appointments_plain_server("appointments_plain", dMAppointments)
+    mod_appointments_telephone_server("appointments_telephone", dMAppointments)
   })
 }

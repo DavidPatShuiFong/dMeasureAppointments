@@ -55,3 +55,64 @@ appointments <- function(
     )
   )
 )
+
+
+#' patient appointment list with telephone numbers
+#'
+#'  derived from dM$appointments_filtered_time
+#'
+#' @md
+#'
+#' @param dMeasureAppointments_obj R6 object
+#'
+#' @return dataframe of apppointments
+#'  $Patient, $AppointmentDate, $AppointmentTime,
+#'  $Provider, $Status, $MobilePhone, $HomePhone, $WorkPhone
+#'
+#' @export
+appointments_telephone <- function(
+  dMeasureAppointments_obj) {
+  dMeasureAppointments_obj$appointments_telephone()
+}
+.public(
+  dMeasureAppointments, "appointments_telephone",
+  function(
+  ) {
+    l <- self$dM$appointments_filtered_time
+
+    intID <- l %>>%
+      dplyr::pull(InternalID) %>>%
+      c(-1)
+
+    # no modifications are made, currently
+    l <- l %>>%
+      dplyr::left_join(
+        self$dM$db$patients %>>%
+          dplyr::select(
+            InternalID, MobilePhone, HomePhone, WorkPhone, Firstname, Surname, Preferredname
+          ) %>>%
+          dplyr::filter(InternalID %in% intID),
+        copy = TRUE
+      ) %>>%
+      dplyr::select(
+        Patient, AppointmentDate, AppointmentTime,
+        Provider, Status,
+        MobilePhone, HomePhone, WorkPhone, Firstname, Surname, Preferredname
+      )
+
+    return(l)
+  }
+)
+.reactive_event(
+  dMeasureAppointments, "appointments_telephoneR",
+  quote(
+    shiny::eventReactive(
+      c(
+        self$dM$appointments_filtered_timeR()
+      ), {
+        self$appointments_telephone(
+        )
+      }
+    )
+  )
+)

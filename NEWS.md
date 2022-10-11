@@ -1,9 +1,38 @@
 ---
 title: "NEWS"
 author: "David Fong"
-date: "09/10/2021"
+date: "11/10/2022"
 output: html_document
 ---
+
+# 1.2.0
+27th November 2021
+
+## New
+
+* send SMS reminders for appointments via 'Join'
+* `initialize_configuration_db` (exported function) and `$read_configuration_db` (method)
+  + integration with `dMeasure` configuration database
+  + `initialize_join_config` and `initialize_sms_config` return lists to assist setting up configuration databases
+  + methods to write, delete and modify the 'Join' configuration database
++ user interface (UI and server) for configuring 'Join' and 'SMStext' with DailyMeasure/GPstat
+
+# 1.1.0
+15th October 2021
+
+## New
+
+* appointment table with telephone numbers
+  + `$appointments_telephone` (exported) appends telephone numbers to `dMeasure$appointments_filtered_time`
+* `$sms_join` (export) send SMS with Join
+  + Join is by joaoapps https://joaoapps.com/join/
+
+# 1.0.1
+12th October 2021
+
+## Changes
+
+* Modularization of user interface
 
 # dMeasureAppointments 1.0.0
 10th October 2021
